@@ -1,4 +1,5 @@
 from itertools import groupby
+from typing import Any
 
 
 def splitted(lst, elem):
@@ -19,15 +20,15 @@ def flatten(lst):
     return [elem for sub_list in lst for elem in sub_list]
 
 
-def insert_at(lst, sub, elem, _all=False):
+def insert_at(lst: list | str, sub: list | str, elem: Any, _all: bool = False):
     """
     Inserts the 'sub' list at the first occurrence of 'elem' in the 'lst' list.
     If '_all' is True, inserts 'sub' at all occurrences of 'elem' in 'lst'.
 
-    :param lst: The list to insert into.
-    :type lst: ``lst``
-    :param sub: The list to insert.
-    :type sub: ``lst``
+    :param lst: The list|string to insert into.
+    :type lst: ``list|str``
+    :param sub: The list|string to insert.
+    :type sub: ``list|str``
     :param elem: The element to search for in 'lst'.
     :type elem: ``Any``
     :param _all: If True, insert at all occurrences of 'elem'. Defaults to False.
@@ -35,12 +36,13 @@ def insert_at(lst, sub, elem, _all=False):
     :rtype: ``lst``
     """
     if isinstance(lst, str):
+        if _all:
+            return lst.replace(elem, sub)
         return "".join(
             insert_at(
                 [c for c in lst],
                 [c for c in sub] if isinstance(sub, str) else sub,
-                elem,
-                _all=_all,
+                str(elem),
             )
         )
 
@@ -60,15 +62,15 @@ def insert_at(lst, sub, elem, _all=False):
     return lst
 
 
-def insert_after(lst, sub, elem, _all=False):
+def insert_after(lst: list | str, sub: list | str, elem: Any, _all: bool = False):
     """
     Inserts the elements of the 'sub' list after the first occurrence of 'elem' in the 'lst' list.
     If '_all' is True, inserts 'sub' after all occurrences of 'elem' in 'lst'.
 
-    :param lst: The list to insert into.
-    :type lst: ``lst``
-    :param sub: The list to insert.
-    :type sub: ``lst``
+    :param lst: The list|string to insert into.
+    :type lst: ``list|str``
+    :param sub: The list|string to insert.
+    :type sub: ``list|str``
     :param elem: The element to search for in 'lst'.
     :type elem: ``Any``
     :param _all: If True, insert after all occurrences of 'elem'. Defaults to False.
@@ -80,7 +82,7 @@ def insert_after(lst, sub, elem, _all=False):
             insert_after(
                 [c for c in lst],
                 [c for c in sub] if isinstance(sub, str) else sub,
-                elem,
+                str(elem),
                 _all=_all,
             )
         )
@@ -100,15 +102,15 @@ def insert_after(lst, sub, elem, _all=False):
     )
 
 
-def insert_before(lst, sub, elem, _all=False):
+def insert_before(lst: list | str, sub: list | str, elem: Any, _all: bool = False):
     """
     Inserts a sublist `sub` before the first occurrence of `elem` in the given list `lst`.
     If `_all` is True, inserts `sub` before all occurrences of `elem` in `lst`.
 
-    :param lst: The list to insert into.
-    :type lst: ``lst``
-    :param sub: The list to insert.
-    :type sub: ``lst``
+    :param lst: The list|string to insert into.
+    :type lst: ``list|str``
+    :param sub: The list|string to insert.
+    :type sub: ``list|str``
     :param elem: The element to search for in 'lst'.
     :type elem: ``Any``
     :param _all: If True, insert before all occurrences of 'elem'. Defaults to False.
@@ -120,7 +122,7 @@ def insert_before(lst, sub, elem, _all=False):
             insert_before(
                 [c for c in lst],
                 [c for c in sub] if isinstance(sub, str) else sub,
-                elem,
+                str(elem),
                 _all=_all,
             )
         )
