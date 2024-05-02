@@ -35,11 +35,13 @@ def insert_at(lst, sub, elem, _all=False):
     :rtype: ``lst``
     """
     if isinstance(lst, str):
-        return insert_at(
-            [c for c in lst],
-            [c for c in sub] if isinstance(sub, str) else sub,
-            elem,
-            _all=_all,
+        return "".join(
+            insert_at(
+                [c for c in lst],
+                [c for c in sub] if isinstance(sub, str) else sub,
+                elem,
+                _all=_all,
+            )
         )
 
     def _insert_at(l):
@@ -74,11 +76,13 @@ def insert_after(lst, sub, elem, _all=False):
     :rtype: ``lst``
     """
     if isinstance(lst, str):
-        return insert_after(
-            [c for c in lst],
-            [c for c in sub] if isinstance(sub, str) else sub,
-            elem,
-            _all=_all,
+        return "".join(
+            insert_after(
+                [c for c in lst],
+                [c for c in sub] if isinstance(sub, str) else sub,
+                elem,
+                _all=_all,
+            )
         )
 
     if not _all:
@@ -112,11 +116,13 @@ def insert_before(lst, sub, elem, _all=False):
     :rtype: ``lst``
     """
     if isinstance(lst, str):
-        return insert_before(
-            [c for c in lst],
-            [c for c in sub] if isinstance(sub, str) else sub,
-            elem,
-            _all=_all,
+        return "".join(
+            insert_before(
+                [c for c in lst],
+                [c for c in sub] if isinstance(sub, str) else sub,
+                elem,
+                _all=_all,
+            )
         )
 
     if not _all:
