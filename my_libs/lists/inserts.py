@@ -9,7 +9,7 @@ def splitted(lst, elem):
     return [list(group) for k, group in groupby(lst, lambda x: x == elem) if not k]
 
 
-def flatten(lst):
+def flatten(lst: list, recurse: bool = False):
     """
     Flattens a nested list into a single list.
 
@@ -17,7 +17,11 @@ def flatten(lst):
     :type lst: ``lst``
     :rtype: ``lst``
     """
-    return [elem for sub_list in lst for elem in sub_list]
+    result = [elem for sub_list in lst for elem in sub_list]
+    if not recurse or not any(isinstance(e, list) for e in result):
+        return result
+    return flatten(result, recurse=True)
+
 
 
 def insert_at(lst: list | str, sub: list | str, elem: Any, _all: bool = False):
@@ -40,8 +44,8 @@ def insert_at(lst: list | str, sub: list | str, elem: Any, _all: bool = False):
             return lst.replace(elem, sub)
         return "".join(
             insert_at(
-                [c for c in lst],
-                [c for c in sub] if isinstance(sub, str) else sub,
+                [*lst],
+                [*sub] if isinstance(sub, str) else sub,
                 str(elem),
             )
         )
@@ -80,8 +84,8 @@ def insert_after(lst: list | str, sub: list | str, elem: Any, _all: bool = False
     if isinstance(lst, str):
         return "".join(
             insert_after(
-                [c for c in lst],
-                [c for c in sub] if isinstance(sub, str) else sub,
+                [*lst],
+                [*sub] if isinstance(sub, str) else sub,
                 str(elem),
                 _all=_all,
             )
@@ -120,8 +124,8 @@ def insert_before(lst: list | str, sub: list | str, elem: Any, _all: bool = Fals
     if isinstance(lst, str):
         return "".join(
             insert_before(
-                [c for c in lst],
-                [c for c in sub] if isinstance(sub, str) else sub,
+                [*lst],
+                [*sub] if isinstance(sub, str) else sub,
                 str(elem),
                 _all=_all,
             )
